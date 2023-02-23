@@ -33,6 +33,7 @@ public class NexiRabbitMQConsumer {
                 System.out.println("RabbitMQ successfully connected!");
                 //basicPublishWithConfirm(client);
                 new RabbitMQExamples().basicConsumer(Vertx.vertx(), client);
+
             } else {
                 System.out.println("Fail to connect to RabbitMQ " + asyncResult.cause().getMessage());
             }

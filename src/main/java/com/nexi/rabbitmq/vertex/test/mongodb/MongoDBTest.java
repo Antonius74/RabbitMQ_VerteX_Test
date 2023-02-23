@@ -14,7 +14,7 @@ public class MongoDBTest {
         searchQuery.put("type", "test");
         DBCollection collection = database.getCollection("NexiCollection");
         DBCursor cursor = collection.find(searchQuery);
-        System.out.println(collection.getCollection("NexiCollection").count());
+        System.out.println(collection.getCollection("NexiCollection"));
         while (cursor.hasNext()) {
             System.out.println(cursor.next());
         }

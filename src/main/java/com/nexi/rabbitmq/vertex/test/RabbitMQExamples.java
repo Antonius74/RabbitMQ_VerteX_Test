@@ -30,8 +30,8 @@ public class RabbitMQExamples {
         redisConnector = new RedisConnector();
     }
     public static void main(String[] args) {
-        //new RabbitMQExamples().createClientWithManualParams(Vertx.vertx());
-        new RabbitMQExamples().createClientWithMultipleHost(Vertx.vertx());
+        new RabbitMQExamples().createClientWithManualParams(Vertx.vertx());
+        //new RabbitMQExamples().createClientWithMultipleHost(Vertx.vertx());
     }
 
     public void createClientWithUri(Vertx vertx) {
@@ -72,11 +72,11 @@ public class RabbitMQExamples {
         client.start(asyncResult -> {
             if (asyncResult.succeeded()) {
                 System.out.println("RabbitMQ successfully connected!");
-                //basicPublish(client);
+                basicPublish(client);
                 for (int i=0; i<1; i++){
-                    basicPublishWithConfirm(client, 10000);
+                    //basicPublishWithConfirm(client, 10000);
                 }
-                //basicConsumer(Vertx.vertx(), client);
+                basicConsumer(Vertx.vertx(), client);
             } else {
                 System.out.println("Fail to connect to RabbitMQ " + asyncResult.cause().getMessage());
             }
@@ -116,8 +116,8 @@ public class RabbitMQExamples {
             int finalI = i;
             client.basicPublish("NexiExchange", "", message, pubResult -> {
                 if (pubResult.succeeded()) {
-                    //hezelcastConnector.connector(String.valueOf(finalI), message.toString());
-                    redisConnector.set(String.valueOf(finalI), message.toString());
+                    hezelcastConnector.connector(String.valueOf(finalI), message.toString());
+                    //redisConnector.set(String.valueOf(finalI), message.toString());
                     //System.out.println(redisConnector.get(String.valueOf(finalI)));
                     //redisConnector.del(String.valueOf(finalI));
 
